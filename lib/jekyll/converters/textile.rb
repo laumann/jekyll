@@ -35,7 +35,13 @@ module Jekyll
         end
       end
 
-      RedCloth.new(content, restrictions).to_html
+      r = RedCloth.new(content, restrictions)
+
+      if !@config['redcloth'].nil? and !@config['redcloth']['hard_breaks'].nil?
+        r.hard_breaks = @config['redcloth']['hard_breaks']
+      end
+
+      r.to_html
     end
   end
 
